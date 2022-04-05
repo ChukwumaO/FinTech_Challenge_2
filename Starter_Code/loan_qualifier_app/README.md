@@ -1,33 +1,64 @@
-# Project Title
+# Loan Qualifier
 
-Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
+Updating the lending software to prompt the user to save the qualifying loans as a new CSV file.
 
 ---
 
 ## Technologies
 
-Describe the technologies required to use your project such as programming languages, libraries, frameworks, and operating systems. Be sure to include the specific versions of any critical dependencies that you have used in the stable version of your project.
+This project utilizes python 3.7.11 with the following libraries:
+
+This project leverages python 3.7 with the following packages:
+
+* [fire](https://github.com/google/python-fire) - For the command line interface, help page, and entry-point.
+
+* [questionary](https://github.com/tmbo/questionary) - For interactive user prompts and dialogs.
+
+* sys - which is inbuilt into python.
+
+* pathlib - To interact with modules and to new csv file.
+
+* csv library - To create a csv file.
 
 ---
 
 ## Installation Guide
 
-In this section, you should include detailed installation notes containing code blocks and screenshots.
+Before running the application first install the following dependencies.
+
+```python
+  pip install fire
+  pip install questionary
+```
 
 ---
 
 ## Usage
 
-This section should include screenshots, code blocks, or animations explaining how to use your project.
+To be able to prompt the user to save csv file, there needs to be data to be saved. If none then exit after msg.
+If there is data, ask the user if they'll like to save and where.
+If "Y" then save but if "N" don't do anything
+``` if not qualifying_loans:
+        sys.exit("Sorry, there are no qualifying loans!")
+
+    saveFile = questionary.confirm("Would you like to save the qualifying loans?").ask()
+
+    if saveFile:
+        csvpath = questionary.text(
+            "Please enter a filepath for the saved data: (qualifying_loans.csv)"
+        ).ask()
+        save_csv(Path(csvpath), qualifying_loans)
+```
 
 ---
 
 ## Contributors
 
-In this section, list all the people who contribute to this project. You might want recruiters or potential collaborators to reach you, so include your contact email and, optionally, your LinkedIn or Twitter profile.
+* Name: Chukwuma Ochu.
+* Email: chukwuma.ochu@gmail.com
 
 ---
 
 ## License
 
-When you share a project on a repository, especially a public one, it's important to choose the right license to specify what others can and can't with your source code and files. Use this section to include the license you want to use.
+gpl
